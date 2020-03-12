@@ -2,11 +2,83 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.security.Key;
 
 public class Calculator extends Window {
     private StringBuilder input = new StringBuilder();
     private StringBuilder output = new StringBuilder();
+
+    /**
+     * This class is used for handling all of the key inputs in the keyboard. Since the text fields are non editable, They key bindings
+     * created here are only limited to the numbers and operators available inside the calculator.
+     */
+    class KeyHandlers implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_9 && e.getKeyCode() == KeyEvent.VK_SHIFT)
+                inputString(" ( ");
+            if (e.getKeyCode() == KeyEvent.VK_0 && e.getKeyCode() == KeyEvent.VK_SHIFT)
+                inputString(" ) ");
+            if (e.getKeyCode() == KeyEvent.VK_DIVIDE || e.getKeyCode() == KeyEvent.VK_SLASH)
+                inputOperator('/');
+            if (e.getKeyCode() == KeyEvent.VK_ASTERISK || e.getKeyCode() == KeyEvent.VK_MULTIPLY)
+                inputOperator('*');
+            if (e.getKeyCode() == KeyEvent.VK_MINUS || e.getKeyCode() == KeyEvent.VK_SUBTRACT)
+                inputOperator('-');
+            if (e.getKeyCode() == KeyEvent.VK_ADD || e.getKeyCode() == KeyEvent.VK_PLUS)
+                inputOperator('+');
+            if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_EQUALS)
+                showResult();
+            if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1)
+                inputString("1");
+            if (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2)
+                inputString("2");
+            if (e.getKeyCode() == KeyEvent.VK_3 || e.getKeyCode() == KeyEvent.VK_NUMPAD3)
+                inputString("3");
+            if (e.getKeyCode() == KeyEvent.VK_4 || e.getKeyCode() == KeyEvent.VK_NUMPAD4)
+                inputString("4");
+            if (e.getKeyCode() == KeyEvent.VK_5 || e.getKeyCode() == KeyEvent.VK_NUMPAD5)
+                inputString("5");
+            if (e.getKeyCode() == KeyEvent.VK_6 || e.getKeyCode() == KeyEvent.VK_NUMPAD6)
+                inputString("6");
+            if (e.getKeyCode() == KeyEvent.VK_7 || e.getKeyCode() == KeyEvent.VK_NUMPAD7)
+                inputString("7");
+            if (e.getKeyCode() == KeyEvent.VK_8 || e.getKeyCode() == KeyEvent.VK_NUMPAD8)
+                inputString("8");
+            if (e.getKeyCode() == KeyEvent.VK_9 || e.getKeyCode() == KeyEvent.VK_NUMPAD9)
+                inputString("9");
+            if (e.getKeyCode() == KeyEvent.VK_0 || e.getKeyCode() == KeyEvent.VK_NUMPAD0)
+                inputString("0");
+            if (e.getKeyCode() == KeyEvent.VK_PERIOD || e.getKeyCode() == KeyEvent.VK_DECIMAL)
+                inputString(".");
+            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                try {
+                    inputField.setText(input.deleteCharAt(input.toString().length() - 1).toString());
+                } catch (Exception ex) {
+                    System.out.println("no number left");
+                }
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                input.delete(0, input.toString().length());
+                output.delete(0, output.toString().length());
+
+                inputField.setText("0");
+                runningResultField.setText("");
+            }
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+    }
+
 
     private static boolean darkMode = false;
 
@@ -52,6 +124,7 @@ public class Calculator extends Window {
             runningResultField.setText("");
         });
     }
+
     /**
      * This sets the action/process of the button for clearing the last character found in the text field.
      */
@@ -64,6 +137,7 @@ public class Calculator extends Window {
             }
         });
     }
+
     /**
      * This sets the action/process of the button for inputting a opening parenthesis which is considered as an operator.
      */
@@ -103,12 +177,13 @@ public class Calculator extends Window {
      */
     private void percentButton() {
         operators[6].addActionListener(e -> {
-            String percentage = toString(computePercentage(parseNumber(input.toString())));
+            String percentage = Double.toString(computePercentage(parseNumber(input.toString())));
             inputField.setText(percentage);
             input.delete(0, input.toString().length());
             input.append(percentage);
         });
     }
+
     /**
      * This sets the action/process of the button which converts the number in the textfield into its Mathematical Inverse
      */
@@ -118,7 +193,7 @@ public class Calculator extends Window {
 
             input.delete(0, input.toString().length());
 
-            inputField.setText(toString(inverse(a)));
+            inputField.setText(Double.toString(inverse(a)));
         });
     }
 
@@ -197,12 +272,14 @@ public class Calculator extends Window {
     private void multiplyButton() {
         operators[15].addActionListener(e -> inputOperator('*'));
     }
+
     /**
      * This sets the action/process of the button when inputting the number 4.
      */
     private void fourButton() {
         operators[16].addActionListener(e -> inputString("4"));
     }
+
     /**
      * This sets the action/process of the button when inputting the number 5.
      */
@@ -256,7 +333,7 @@ public class Calculator extends Window {
      * This sets the action/process of the button when you want to negate the number inside the text field.
      */
     private void negateButton() {
-        operators[24].addActionListener(e -> inputField.setText(toString(negate((int) parseNumber(inputField.getText())))));
+        operators[24].addActionListener(e -> inputField.setText(Double.toString(negate((int) parseNumber(inputField.getText())))));
     }
 
     /**
@@ -281,11 +358,15 @@ public class Calculator extends Window {
      * This sets the action/process of the button when you want to find the result of the series that you have inputted.
      */
     private void resultButton() {
-        operators[27].addActionListener(e -> {
-            showResult();
-        });
+        operators[27].addActionListener(e -> showResult());
     }
 
+    /**
+     * This method is used for inputting a string inside the text field. It is done by setting the input text field's text
+     * to the string made through the string builder. Each token in the string is separated by a space.
+     *
+     * @param token String to be appended
+     */
     private void inputString(String token) {
         if (input.toString().equalsIgnoreCase("0")) {
             input.delete(0, input.toString().length());
@@ -305,10 +386,23 @@ public class Calculator extends Window {
         runningResultField.setText(series);
     }
 
-    private void setButtonColors(int button_operators_color, int button_numbers_color, int windows_background, int buttons_panel, int mode_text) {
+    /**
+     * <n>This method is sued for changing the color theme of the Calculator program.</n>
+     * <n>The following components are changed:</n>
+     * <n>Button's Background and Text Color</n>
+     * <n>Main Panel, Button Panel, Input and Output Text Panel</n>
+     * <n>Input and Running Result Text Fields</n>
+     *
+     * @param button_operators_color color for the buttons
+     * @param button_text_color color for the button's text
+     * @param windows_background background color
+     * @param buttons_panel buttons background color
+     * @param mode_text color of the text
+     */
+    private void setButtonColors(int button_operators_color, int button_text_color, int windows_background, int buttons_panel, int mode_text) {
         for (JButton lightMode : operators) {
             lightMode.setBackground(new Color(button_operators_color));
-            lightMode.setForeground(new Color(button_numbers_color));
+            lightMode.setForeground(new Color(button_text_color));
         }
 
         mainPanel.setBackground(new Color(windows_background));
@@ -321,7 +415,11 @@ public class Calculator extends Window {
         runningResultField.setForeground(new Color(mode_text));
     }
 
-    void showResult(){
+    /**
+     * This method is used for showing the Result of the inputted series. It also carries out an error in case a Syntax error
+     * occured during the typing of the problem.
+     */
+    private void showResult() {
         try {
             String series = output.append(inputField.getText()).toString();
             System.out.println(series);
@@ -341,74 +439,9 @@ public class Calculator extends Window {
         }
     }
 
-    class KeyHandlers implements KeyListener {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_9 && e.getKeyCode() == KeyEvent.VK_SHIFT)
-                inputString(" ( ");
-            if (e.getKeyCode() == KeyEvent.VK_0 && e.getKeyCode() == KeyEvent.VK_SHIFT)
-                inputString(" ) ");
-            if (e.getKeyCode() == KeyEvent.VK_DIVIDE || e.getKeyCode() == KeyEvent.VK_SLASH)
-                inputOperator('/');
-            if (e.getKeyCode() == KeyEvent.VK_ASTERISK || e.getKeyCode() == KeyEvent.VK_MULTIPLY)
-                inputOperator('*');
-            if (e.getKeyCode() == KeyEvent.VK_MINUS || e.getKeyCode() == KeyEvent.VK_SUBTRACT)
-                inputOperator('-');
-            if (e.getKeyCode() == KeyEvent.VK_ADD || e.getKeyCode() == KeyEvent.VK_PLUS)
-                inputOperator('+');
-            if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_EQUALS)
-                showResult();
-            if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1)
-                inputString("1");
-            if (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2)
-                inputString("2");
-            if (e.getKeyCode() == KeyEvent.VK_3 || e.getKeyCode() == KeyEvent.VK_NUMPAD3)
-                inputString("3");
-            if (e.getKeyCode() == KeyEvent.VK_4 || e.getKeyCode() == KeyEvent.VK_NUMPAD4)
-                inputString("4");
-            if (e.getKeyCode() == KeyEvent.VK_5 || e.getKeyCode() == KeyEvent.VK_NUMPAD5)
-                inputString("5");
-            if (e.getKeyCode() == KeyEvent.VK_6 || e.getKeyCode() == KeyEvent.VK_NUMPAD6)
-                inputString("6");
-            if (e.getKeyCode() == KeyEvent.VK_7 || e.getKeyCode() == KeyEvent.VK_NUMPAD7)
-                inputString("7");
-            if (e.getKeyCode() == KeyEvent.VK_8 || e.getKeyCode() == KeyEvent.VK_NUMPAD8)
-                inputString("8");
-            if (e.getKeyCode() == KeyEvent.VK_9 || e.getKeyCode() == KeyEvent.VK_NUMPAD9)
-                inputString("9");
-            if (e.getKeyCode() == KeyEvent.VK_0 || e.getKeyCode() == KeyEvent.VK_NUMPAD0)
-                inputString("0");
-            if (e.getKeyCode() == KeyEvent.VK_PERIOD || e.getKeyCode() == KeyEvent.VK_DECIMAL)
-                inputString(".");
-            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                try {
-                    inputField.setText(input.deleteCharAt(input.toString().length() - 1).toString());
-                } catch (Exception ex) {
-                    System.out.println("no number left");
-                }
-            }
-            if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-                input.delete(0, input.toString().length());
-                output.delete(0, output.toString().length());
-
-                inputField.setText("0");
-                runningResultField.setText("");
-            }
-
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
-    }
-
+    /**
+     * This just simply calls all of the methods needed for the actions of every button.
+     */
     private void buttonHandlers() {
         clearLastEntryButton();
         clearAllButton();
@@ -439,6 +472,10 @@ public class Calculator extends Window {
         resultButton();
     }
 
+    /**
+     * This starts up and creates all of the required objects for the GUI and adds all of the needed Listeners in order for the
+     * program to function very well.
+     */
     private void initComponents() {
         frame = new JFrame("Calculator");
         mainPanel = new JPanel();
@@ -466,28 +503,51 @@ public class Calculator extends Window {
 
     }
 
-    private double computePercentage(double num){
+    /**
+     * <n>This computes the percentage of a given number.</n>
+     * <n>Formula: num divided by 100 ( num / 100 )</n>
+     * @param num to be converted
+     * @return percentage form
+     */
+    private double computePercentage(double num) {
         return num / 100;
     }
 
-    private double inverse(double num){
+    /**
+     * <n>This converts a given number into its mathematical inverse.</n>
+     * <n>Formula: 1 divided by num ( 1 / num )</n>
+     * @param num to be converted
+     * @return mathematical inverse
+     */
+    private double inverse(double num) {
         return 1 / num;
     }
 
-    private double negate(int num){
+    /**
+     * <n>This negates a given number into its opposite sign.</n>
+     * <n>If a number is positive then it is converted into a negative number, otherwise it will be a positive number.</n>
+     * @param num to be converted
+     * @return sign negated
+     */
+    private double negate(int num) {
         return Math.negateExact(num);
     }
 
-    private String toString(Double num){
-        return Double.toString(num);
-    }
-
-    private static double parseNumber(String token){
+    /**
+     * <n>This is used for parsing a given string which is assumed to be a valid number.</n>
+     * <n>Algorithm:</n>
+     * <n>1. A given token is tried for parsing into a double</n>
+     * <n>2. In case the given token is not a number and the parsing process failed, It will print out an error</n>
+     * <n>3. If it is a valid number, it will return the token into a data type of a double.</n>
+     * @param token to be converted
+     * @return data type double
+     */
+    private static double parseNumber(String token) {
         double parsed = 0;
 
         try {
             parsed = Double.parseDouble(token);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("not a number");
         }
 
