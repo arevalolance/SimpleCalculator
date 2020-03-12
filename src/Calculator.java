@@ -235,7 +235,13 @@ public class Calculator extends Window {
      * This sets the action/process of the button for converting the value given in the textfield into its absolute value.
      */
     private void absoluteButton() {
-        operators[10].addActionListener(e -> inputField.setText(String.valueOf(Math.abs(Integer.parseInt(input.toString())))));
+        operators[10].addActionListener(e -> {
+            double absolute = Math.abs(parseNumber(input.toString()));
+
+            input.delete(0,input.toString().length());
+            input.append(absolute);
+            inputField.setText(input.toString());
+        });
     }
 
     /**
@@ -333,7 +339,14 @@ public class Calculator extends Window {
      * This sets the action/process of the button when you want to negate the number inside the text field.
      */
     private void negateButton() {
-        operators[24].addActionListener(e -> inputField.setText(Double.toString(negate((int) parseNumber(inputField.getText())))));
+        operators[24].addActionListener(e -> {
+            double negated = negate((int) parseNumber(input.toString()));
+
+            input.delete(0,input.toString().length());
+
+            input.append(negated);
+            inputField.setText(input.toString());
+        });
     }
 
     /**
