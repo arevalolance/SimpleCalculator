@@ -7,7 +7,7 @@ class Window {
     JPanel inputPanel;
     JPanel resultPanel;
     JPanel mainPanel;
-    public JTextField inputField;
+    JTextField inputField;
     JTextField runningResultField;
     JButton[] operators = new JButton[]{
             new JButton("DARK"),
@@ -39,7 +39,6 @@ class Window {
             new JButton("."),
             new JButton("=")
     };
-    ;
 
     final int LIGHT_BUTTON_OPERATORS_COLOR = 0xdcdde1;
     final int LIGHT_WINDOWS_BACKGROUND = 0xe6e6e6;
@@ -59,6 +58,7 @@ class Window {
             button.setPreferredSize(new Dimension(100, 75));
             button.setFont(new Font("Roboto", Font.BOLD, 15));
             operators[operators.length - 1].setBackground(new Color(0x3498db));
+
             buttonPanel.add(button);
         }
 

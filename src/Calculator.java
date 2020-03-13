@@ -90,10 +90,11 @@ public class Calculator extends Window {
             darkMode = !darkMode; // --> boolean that negates the current state when pressed
             if (darkMode) {
                 setButtonColors(DARK_BUTTON_OPERATORS_COLOR, DARK_MODE_TEXT, DARK_WINDOWS_BACKGROUND, DARK_WINDOWS_BACKGROUND, DARK_MODE_TEXT);
-            } else {
-                setButtonColors(LIGHT_BUTTON_OPERATORS_COLOR, LIGHT_MODE_TEXT, LIGHT_WINDOWS_BACKGROUND, LIGHT_WINDOWS_BACKGROUND, LIGHT_MODE_TEXT);
                 operators[operators.length - 1].setBackground(new Color(DARK_MODE_TEXT));
                 operators[operators.length - 1].setForeground(new Color(DARK_WINDOWS_BACKGROUND));
+            } else {
+                setButtonColors(LIGHT_BUTTON_OPERATORS_COLOR, LIGHT_MODE_TEXT, LIGHT_WINDOWS_BACKGROUND, LIGHT_WINDOWS_BACKGROUND, LIGHT_MODE_TEXT);
+                operators[operators.length - 1].setBackground(new Color(0x3498db));
             }
         });
     }

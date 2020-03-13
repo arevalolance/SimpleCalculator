@@ -82,7 +82,7 @@ class Operation {
 
             // right parenthesis
             else if (token.equals(")")) {
-                while (!stack.peek().equals("("))
+                while (!(stack.peek() != null && stack.peek().equals("(")))
                     output.append(stack.pop()).append(' ');
                 stack.pop();
             } else {
@@ -102,7 +102,7 @@ class Operation {
      * <n>Algorithm:</n>
      * <n>1. Starts the loop for the whole series.</n>
      * <n>2. It then tries to push the given token to the stack if it is a proper number.</n>
-     * <n>3. If it is a operator, it would then pop two items from the stack for computing.</n>
+     * <n>3. If it is a operator, it would then pop two items which is a number from the stack for computing.</n>
      * <n>4. After the loop is finished and computed, it would then return the final output.</n>
      *
      * @param postfix arranged form of the series
