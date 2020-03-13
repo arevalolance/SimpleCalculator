@@ -3,6 +3,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * <p><code>Calculator</code> is an executable class where it also holds all of the necessary processes needed
+ * for the program to run. This class contains all of the key bindings, button handlers, computing
+ * process ( basic computings ) and the initialization of the components.</p>
+ *
+ * <p>In regards to the algorithm used for computing the series inputted following the PEMDAS rule
+ * Please see {@link Operation}</p>
+ *
+ * @author Lance Gabrielle S Arevalo
+ */
 public class Calculator extends Window {
     private StringBuilder input = new StringBuilder();
     private StringBuilder output = new StringBuilder();
@@ -239,7 +249,7 @@ public class Calculator extends Window {
         operators[10].addActionListener(e -> {
             double absolute = Math.abs(parseNumber(input.toString()));
 
-            input.delete(0,input.toString().length());
+            input.delete(0, input.toString().length());
             input.append(absolute);
             inputField.setText(input.toString());
         });
@@ -343,7 +353,7 @@ public class Calculator extends Window {
         operators[24].addActionListener(e -> {
             double negated = negate((int) parseNumber(input.toString()));
 
-            input.delete(0,input.toString().length());
+            input.delete(0, input.toString().length());
 
             input.append(negated);
             inputField.setText(input.toString());
@@ -408,10 +418,10 @@ public class Calculator extends Window {
      * <n>Input and Running Result Text Fields</n>
      *
      * @param button_operators_color color for the buttons
-     * @param button_text_color color for the button's text
-     * @param windows_background background color
-     * @param buttons_panel buttons background color
-     * @param mode_text color of the text
+     * @param button_text_color      color for the button's text
+     * @param windows_background     background color
+     * @param buttons_panel          buttons background color
+     * @param mode_text              color of the text
      */
     private void setButtonColors(int button_operators_color, int button_text_color, int windows_background, int buttons_panel, int mode_text) {
         for (JButton lightMode : operators) {
@@ -487,6 +497,62 @@ public class Calculator extends Window {
     }
 
     /**
+     * <n>This computes the percentage of a given number.</n>
+     * <n>Formula: num divided by 100 ( num / 100 )</n>
+     *
+     * @param num to be converted
+     * @return percentage form
+     */
+    private double computePercentage(double num) {
+        return num / 100;
+    }
+
+    /**
+     * <n>This converts a given number into its mathematical inverse.</n>
+     * <n>Formula: 1 divided by num ( 1 / num )</n>
+     *
+     * @param num to be converted
+     * @return mathematical inverse
+     */
+    private double inverse(double num) {
+        return 1 / num;
+    }
+
+    /**
+     * <n>This negates a given number into its opposite sign.</n>
+     * <n>If a number is positive then it is converted into a negative number, otherwise it will be a positive number.</n>
+     *
+     * @param num to be converted
+     * @return sign negated
+     */
+    private double negate(int num) {
+        return Math.negateExact(num);
+    }
+
+    /**
+     * <n>This is used for parsing a given string which is assumed to be a valid number.</n>
+     * <n>Algorithm:</n>
+     * <n>1. A given token is tried for parsing into a double</n>
+     * <n>2. In case the given token is not a number and the parsing process failed, It will print out an error</n>
+     * <n>3. If it is a valid number, it will return the token into a data type of a double.</n>
+     *
+     * @param token to be converted
+     * @return data type double
+     */
+    private static double parseNumber(String token) {
+        double parsed = 0;
+
+        try {
+            parsed = Double.parseDouble(token);
+        } catch (Exception e) {
+            System.out.println("not a number");
+        }
+
+        return parsed;
+    }
+
+
+    /**
      * This starts up and creates all of the required objects for the GUI and adds all of the needed Listeners in order for the
      * program to function very well.
      */
@@ -515,57 +581,6 @@ public class Calculator extends Window {
         runningResultField.addKeyListener(keyHandlers);
         frame.addKeyListener(keyHandlers);
 
-    }
-
-    /**
-     * <n>This computes the percentage of a given number.</n>
-     * <n>Formula: num divided by 100 ( num / 100 )</n>
-     * @param num to be converted
-     * @return percentage form
-     */
-    private double computePercentage(double num) {
-        return num / 100;
-    }
-
-    /**
-     * <n>This converts a given number into its mathematical inverse.</n>
-     * <n>Formula: 1 divided by num ( 1 / num )</n>
-     * @param num to be converted
-     * @return mathematical inverse
-     */
-    private double inverse(double num) {
-        return 1 / num;
-    }
-
-    /**
-     * <n>This negates a given number into its opposite sign.</n>
-     * <n>If a number is positive then it is converted into a negative number, otherwise it will be a positive number.</n>
-     * @param num to be converted
-     * @return sign negated
-     */
-    private double negate(int num) {
-        return Math.negateExact(num);
-    }
-
-    /**
-     * <n>This is used for parsing a given string which is assumed to be a valid number.</n>
-     * <n>Algorithm:</n>
-     * <n>1. A given token is tried for parsing into a double</n>
-     * <n>2. In case the given token is not a number and the parsing process failed, It will print out an error</n>
-     * <n>3. If it is a valid number, it will return the token into a data type of a double.</n>
-     * @param token to be converted
-     * @return data type double
-     */
-    private static double parseNumber(String token) {
-        double parsed = 0;
-
-        try {
-            parsed = Double.parseDouble(token);
-        } catch (Exception e) {
-            System.out.println("not a number");
-        }
-
-        return parsed;
     }
 
     public static void main(String[] args) {

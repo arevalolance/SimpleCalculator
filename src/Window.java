@@ -1,6 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * <code>Window</code> is a class where all of the GUI components are created. This class contains all of my
+ * <code>JPanel</code>, <code>JTextField</code>, <code>JButton</code> components are created and added into the
+ * <code>JFrame</code>.
+ * <p>
+ * Most of the Frontend components are created here. Starting from the Buttons and their proper Labels to the Colors
+ * of each Component that can be found in the Program. In case there is something to be changed in how the GUI Looks,
+ * Tweak some of the properties that can be found in here.
+ * <p>
+ * Each of the Components initialization can be found in their proper methods.
+ *
+ * @author Lance Gabrielle S Arevalo
+ */
 class Window {
     JFrame frame;
     JPanel buttonPanel;

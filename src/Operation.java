@@ -1,7 +1,24 @@
 import java.util.*;
 
+/**
+ * <code>Operation</code> contains all of the computing algorithm for converting a series into a postfix form
+ * that follows the proper precedence of a number and operator based on a created enum of Operators.
+ * <p>
+ * <p>The Algorithm that was used for creating this was the Shunting Yard Algorithm by Dijkstra.</p>
+ *
+ * <p>
+ * The Shunting Yard Algorithm is a method for parsing mathematical expressions which is in an infix form
+ * to a postfix notation string. The Algorithm below uses Deque which can be used as a Stack that is Usually
+ * used when implementing the said method.
+ *
+ * @author Lance Gabrielle S Arevalo
+ */
 class Operation {
 
+    /**
+     * This creates a key and value pair for the Operators. Each of the Operator is assigned to a specific element
+     * that can be found in the enumerator created [ Please see {@link Operator} ]
+     */
     private static Map<String, Operator> ops = new HashMap<>() {{
         put("+", Operator.ADD);
         put("-", Operator.SUBTRACT);
@@ -24,9 +41,6 @@ class Operation {
     private static boolean isHigherPrecedence(String op, String sub) {
         return (ops.containsKey(sub) && ops.get(sub).precedence >= ops.get(op).precedence);
     }
-
-
-    //TODO: THINK OF A BETTER WORD FOR "PRECEDENCE"
 
     /**
      * <n>This a method to convert a given series (infix) to a postfix form that arranges it according to its proper precedence.</n>
