@@ -15,7 +15,15 @@ import java.awt.event.KeyListener;
  */
 public class Calculator extends Window {
 
+    /**
+     * Acts as a container for the user's input on the calculator.
+     */
     private StringBuilder input = new StringBuilder();
+
+    /**
+     * Acts as a container for the whole series inputted by the user.
+     * This is used for producing the final output.
+     */
     private StringBuilder output = new StringBuilder();
 
     /**
