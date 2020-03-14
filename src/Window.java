@@ -103,11 +103,11 @@ class Window {
         resultPanel.add(runningResultField);
     }
 
-    void setNamePanel(){
+    void setNamePanel() {
         namePanel = new JPanel();
         creatorLabel = new JLabel("Arevalo, Lance Gabrielle S.");
 
-        creatorLabel.setFont(new Font("Roboto", Font.PLAIN,12));
+        creatorLabel.setFont(new Font("Roboto", Font.PLAIN, 12));
         creatorLabel.setForeground(LIGHT_MODE_TEXT);
 
         namePanel.setBackground(LIGHT_WINDOWS_BACKGROUND);
@@ -117,13 +117,13 @@ class Window {
 
     void setFrame() {
         subPanel.setLayout(new BorderLayout());
-        subPanel.add(buttonPanel,BorderLayout.NORTH);
-        subPanel.add(namePanel,BorderLayout.SOUTH);
+        subPanel.add(buttonPanel, BorderLayout.NORTH);
+        subPanel.add(namePanel, BorderLayout.SOUTH);
 
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(inputPanel, BorderLayout.CENTER);
         mainPanel.add(resultPanel, BorderLayout.NORTH);
-        mainPanel.add(subPanel,BorderLayout.SOUTH);
+        mainPanel.add(subPanel, BorderLayout.SOUTH);
 
         frame.setMinimumSize(new Dimension(300, 600));
         frame.setIconImage(new ImageIcon("assets/calculator_icon.png").getImage());

@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * <p>{@code Calculator} is an executable class where it also holds all of the necessary processes needed
- * for the program to run. This class contains all of the key bindings, button handlers, computing
+ * <p>{@code Calculator} holds all of the necessary processes needed for the program
+ * to run. This class contains all of the key bindings, button handlers, computing
  * process ( basic computings ) and the initialization of the components.</p>
  *
  * <p>In regards to the algorithm used for computing the series inputted following the PEMDAS rule
@@ -92,7 +92,10 @@ public class Calculator extends Window {
 
 
     /**
+     * This variable contains the state of the window's theme.
      *
+     * {@code darkMode} = true means that it's in dark mode
+     * {@code darkMode} = false means that it's in light mode
      */
     private static boolean darkMode = false;
 
@@ -362,7 +365,7 @@ public class Calculator extends Window {
      */
     private void negateButton() {
         operators[24].addActionListener(e -> {
-            double negated = negate((int) parseNumber(input.toString()));
+            double negated = negate(parseNumber(input.toString()));
 
             input.delete(0, input.toString().length());
 
@@ -536,9 +539,7 @@ public class Calculator extends Window {
      * @param num to be converted
      * @return sign negated
      */
-    private double negate(int num) {
-        return Math.negateExact(num);
-    }
+    private double negate(double num) { return num * -1;}
 
     /**
      * <n>This is used for parsing a given string which is assumed to be a valid number.</n>
@@ -567,7 +568,7 @@ public class Calculator extends Window {
      * This starts up and creates all of the required objects for the GUI and adds all of the needed Listeners in order for the
      * program to function very well.
      */
-    private void initComponents() {
+    void initComponents() {
         frame = new JFrame("Calculator");
         mainPanel = new JPanel();
         buttonPanel = new JPanel();
@@ -594,23 +595,6 @@ public class Calculator extends Window {
         runningResultField.addKeyListener(keyHandlers);
         frame.addKeyListener(keyHandlers);
 
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Calculator window = new Calculator();
-            try {
-
-                long startTime = System.nanoTime();
-                long endTime = System.nanoTime();
-
-                System.out.println("Took " + (endTime - startTime) + "ms");
-
-                window.initComponents();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 
 }
