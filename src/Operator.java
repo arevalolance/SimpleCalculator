@@ -1,5 +1,5 @@
 /**
- * <code>Operator</code> sets all of the proper values for each operator that can be used in a Calculator.
+ * {@code Operator} sets all of the proper values for each operator that can be used in a Calculator.
  * With this, it will set a value for the proper precedence of every key.
  */
 enum Operator {

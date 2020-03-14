@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * <p><code>Calculator</code> is an executable class where it also holds all of the necessary processes needed
+ * <p>{@code Calculator} is an executable class where it also holds all of the necessary processes needed
  * for the program to run. This class contains all of the key bindings, button handlers, computing
  * process ( basic computings ) and the initialization of the components.</p>
  *
@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
  * @author Lance Gabrielle S Arevalo
  */
 public class Calculator extends Window {
+
     private StringBuilder input = new StringBuilder();
     private StringBuilder output = new StringBuilder();
 
@@ -90,6 +91,9 @@ public class Calculator extends Window {
     }
 
 
+    /**
+     *
+     */
     private static boolean darkMode = false;
 
     /**
@@ -100,11 +104,17 @@ public class Calculator extends Window {
             darkMode = !darkMode; // --> boolean that negates the current state when pressed
             if (darkMode) {
                 setButtonColors(DARK_BUTTON_OPERATORS_COLOR, DARK_MODE_TEXT, DARK_WINDOWS_BACKGROUND, DARK_WINDOWS_BACKGROUND, DARK_MODE_TEXT);
-                operators[operators.length - 1].setBackground(new Color(DARK_MODE_TEXT));
-                operators[operators.length - 1].setForeground(new Color(DARK_WINDOWS_BACKGROUND));
+                operators[operators.length - 1].setBackground(DARK_MODE_TEXT);
+                operators[operators.length - 1].setForeground(DARK_WINDOWS_BACKGROUND);
+
+                namePanel.setBackground(DARK_WINDOWS_BACKGROUND);
+                creatorLabel.setForeground(DARK_MODE_TEXT);
             } else {
                 setButtonColors(LIGHT_BUTTON_OPERATORS_COLOR, LIGHT_MODE_TEXT, LIGHT_WINDOWS_BACKGROUND, LIGHT_WINDOWS_BACKGROUND, LIGHT_MODE_TEXT);
                 operators[operators.length - 1].setBackground(new Color(0x3498db));
+
+                namePanel.setBackground(LIGHT_WINDOWS_BACKGROUND);
+                creatorLabel.setForeground(LIGHT_MODE_TEXT);
             }
         });
     }
@@ -200,11 +210,12 @@ public class Calculator extends Window {
      */
     private void inverseButton() {
         operators[7].addActionListener(e -> {
-            double a = parseNumber(inputField.getText());
+            double a = inverse(parseNumber(inputField.getText()));
 
             input.delete(0, input.toString().length());
 
-            inputField.setText(Double.toString(inverse(a)));
+            input.append(a);
+            inputField.setText(input.toString());
         });
     }
 
@@ -419,24 +430,24 @@ public class Calculator extends Window {
      *
      * @param button_operators_color color for the buttons
      * @param button_text_color      color for the button's text
-     * @param windows_background     background color
-     * @param buttons_panel          buttons background color
-     * @param mode_text              color of the text
+     * @param windows_background_color     background color
+     * @param buttons_panel_color          buttons background color
+     * @param text_color              color of the text
      */
-    private void setButtonColors(int button_operators_color, int button_text_color, int windows_background, int buttons_panel, int mode_text) {
+    private void setButtonColors(Color button_operators_color, Color button_text_color, Color windows_background_color, Color buttons_panel_color, Color text_color) {
         for (JButton lightMode : operators) {
-            lightMode.setBackground(new Color(button_operators_color));
-            lightMode.setForeground(new Color(button_text_color));
+            lightMode.setBackground(button_operators_color);
+            lightMode.setForeground(button_text_color);
         }
 
-        mainPanel.setBackground(new Color(windows_background));
-        buttonPanel.setBackground(new Color(buttons_panel));
+        mainPanel.setBackground(windows_background_color);
+        buttonPanel.setBackground(buttons_panel_color);
 
-        inputField.setBackground(new Color(windows_background));
-        inputField.setForeground(new Color(mode_text));
+        inputField.setBackground(windows_background_color);
+        inputField.setForeground(text_color);
 
-        runningResultField.setBackground(new Color(windows_background));
-        runningResultField.setForeground(new Color(mode_text));
+        runningResultField.setBackground(windows_background_color);
+        runningResultField.setForeground(text_color);
     }
 
     /**
@@ -564,9 +575,11 @@ public class Calculator extends Window {
         resultPanel = new JPanel();
         inputField = new JTextField("0");
         runningResultField = new JTextField();
+        subPanel = new JPanel();
 
         darkModeToggle();
 
+        setNamePanel();
         setTextPanel();
         setButtonPanel();
         setFrame();
@@ -587,6 +600,12 @@ public class Calculator extends Window {
         SwingUtilities.invokeLater(() -> {
             Calculator window = new Calculator();
             try {
+
+                long startTime = System.nanoTime();
+                long endTime = System.nanoTime();
+
+                System.out.println("Took " + (endTime - startTime) + "ms");
+
                 window.initComponents();
             } catch (Exception e) {
                 e.printStackTrace();

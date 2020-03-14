@@ -1,7 +1,11 @@
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Stack;
 
 /**
- * <code>Operation</code> contains all of the computing algorithm for converting a series into a postfix form
+ * {@code Operation} contains all of the computing algorithm for converting a series into a postfix form
  * that follows the proper precedence of a number and operator based on a created enum of Operators.
  * <p>
  * <p>The Algorithm that was used for creating this was the Shunting Yard Algorithm by Dijkstra.</p>

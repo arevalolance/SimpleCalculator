@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * <code>Window</code> is a class where all of the GUI components are created. This class contains all of my
- * <code>JPanel</code>, <code>JTextField</code>, <code>JButton</code> components are created and added into the
- * <code>JFrame</code>.
+ * {@code Window} is a class where all of the GUI components are created. This class contains all of my
+ * {@code JPanel}, {@code JTextField}, {@code JButton} components are created and added into the
+ * {@code JFrame}.
  * <p>
  * Most of the Frontend components are created here. Starting from the Buttons and their proper Labels to the Colors
  * of each Component that can be found in the Program. In case there is something to be changed in how the GUI Looks,
@@ -15,11 +15,14 @@ import java.awt.*;
  * @author Lance Gabrielle S Arevalo
  */
 class Window {
+    JLabel creatorLabel;
     JFrame frame;
     JPanel buttonPanel;
     JPanel inputPanel;
     JPanel resultPanel;
     JPanel mainPanel;
+    JPanel namePanel;
+    JPanel subPanel;
     JTextField inputField;
     JTextField runningResultField;
     JButton[] operators = new JButton[]{
@@ -53,27 +56,28 @@ class Window {
             new JButton("=")
     };
 
-    final int LIGHT_BUTTON_OPERATORS_COLOR = 0xdcdde1;
-    final int LIGHT_WINDOWS_BACKGROUND = 0xe6e6e6;
-    final int LIGHT_MODE_TEXT = 0x00000;
+    final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
+    final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
+    final Color LIGHT_MODE_TEXT = new Color(0x00000);
 
-    final int DARK_MODE_TEXT = 0xecf0f1;
-    final int DARK_WINDOWS_BACKGROUND = 0x1f1f1f;
-    final int DARK_BUTTON_OPERATORS_COLOR = 0x0131313;
+    final Color DARK_MODE_TEXT = new Color(0xecf0f1);
+    final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
+    final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
 
 
     void setButtonPanel() {
         buttonPanel.setLayout(new GridLayout(7, 4, 2, 2));
 
         for (JButton button : operators) {
-            button.setBackground(new Color(LIGHT_BUTTON_OPERATORS_COLOR));
+            button.setBackground(LIGHT_BUTTON_OPERATORS_COLOR);
             button.setBorder(null);
             button.setPreferredSize(new Dimension(100, 75));
             button.setFont(new Font("Roboto", Font.BOLD, 15));
-            operators[operators.length - 1].setBackground(new Color(0x3498db));
 
             buttonPanel.add(button);
         }
+
+        operators[operators.length - 1].setBackground(new Color(0x3498db));
 
     }
 
@@ -99,11 +103,27 @@ class Window {
         resultPanel.add(runningResultField);
     }
 
+    void setNamePanel(){
+        namePanel = new JPanel();
+        creatorLabel = new JLabel("Arevalo, Lance Gabrielle S.");
+
+        creatorLabel.setFont(new Font("Roboto", Font.PLAIN,12));
+        creatorLabel.setForeground(LIGHT_MODE_TEXT);
+
+        namePanel.setBackground(LIGHT_WINDOWS_BACKGROUND);
+
+        namePanel.add(creatorLabel);
+    }
+
     void setFrame() {
+        subPanel.setLayout(new BorderLayout());
+        subPanel.add(buttonPanel,BorderLayout.NORTH);
+        subPanel.add(namePanel,BorderLayout.SOUTH);
+
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(inputPanel, BorderLayout.CENTER);
         mainPanel.add(resultPanel, BorderLayout.NORTH);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        mainPanel.add(subPanel,BorderLayout.SOUTH);
 
         frame.setMinimumSize(new Dimension(300, 600));
         frame.setIconImage(new ImageIcon("assets/calculator_icon.png").getImage());
