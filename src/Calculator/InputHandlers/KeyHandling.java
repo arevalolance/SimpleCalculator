@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
  * created here are only limited to the numbers and operators available inside the calculator.
  */
 
-public class KeyHandling extends ButtonHandling implements KeyListener{
+public class KeyHandling extends DataHandling implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -22,13 +22,13 @@ public class KeyHandling extends ButtonHandling implements KeyListener{
         if (e.getKeyCode() == KeyEvent.VK_0 && e.getKeyCode() == KeyEvent.VK_SHIFT)
             inputString(" ) ");
         if (e.getKeyCode() == KeyEvent.VK_DIVIDE || e.getKeyCode() == KeyEvent.VK_SLASH)
-            inputOperator('/');
+            inputOperator("/");
         if (e.getKeyCode() == KeyEvent.VK_ASTERISK || e.getKeyCode() == KeyEvent.VK_MULTIPLY)
-            inputOperator('*');
+            inputOperator("*");
         if (e.getKeyCode() == KeyEvent.VK_MINUS || e.getKeyCode() == KeyEvent.VK_SUBTRACT)
-            inputOperator('-');
+            inputOperator("-");
         if (e.getKeyCode() == KeyEvent.VK_ADD || e.getKeyCode() == KeyEvent.VK_PLUS)
-            inputOperator('+');
+            inputOperator("+");
         if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_EQUALS)
             showResult();
         if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1)

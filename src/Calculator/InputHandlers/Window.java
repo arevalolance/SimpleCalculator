@@ -1,10 +1,13 @@
-package Calculator;
+package Calculator.InputHandlers;
+
+import Calculator.InputHandlers.ButtonHandling;
+import Calculator.InputHandlers.KeyHandling;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * {@code Calculator.Window} is a class where all of the GUI components are created. This class contains all of my
+ * {@code Calculator.InputHandlers.Window} is a class where all of the GUI components are created. This class contains all of my
  * {@code JPanel}, {@code JTextField}, {@code JButton} components are created and added into the
  * {@code JFrame}.
  * <p>
@@ -17,17 +20,17 @@ import java.awt.*;
  * @author Lance Gabrielle S Arevalo
  */
 public class Window {
-    protected JLabel creatorLabel;
-    protected JFrame frame;
-    protected JPanel buttonPanel;
-    protected JPanel inputPanel;
-    protected JPanel resultPanel;
-    protected JPanel mainPanel;
-    protected JPanel namePanel;
-    protected JPanel subPanel;
-    protected JTextField inputField;
-    protected JTextField runningResultField;
-    protected JButton[] operators = new JButton[]{
+    public JLabel creatorLabel;
+    public JFrame frame;
+    public JPanel buttonPanel;
+    public JPanel inputPanel;
+    public JPanel resultPanel;
+    public JPanel mainPanel;
+    public JPanel namePanel;
+    public JPanel subPanel;
+    public JTextField inputField;
+    public JTextField runningResultField;
+    public JButton[] operators = new JButton[]{
             new JButton("DARK"),
             new JButton("π"),
             new JButton("CE"),
@@ -52,7 +55,7 @@ public class Window {
             new JButton("9"),
             new JButton("*"),
 
-            new JButton("logₓy"),
+            new JButton("log" + ("\\U+2093") + "y"),
             new JButton("4"),
             new JButton("5"),
             new JButton("6"),
@@ -71,16 +74,16 @@ public class Window {
             new JButton("=")
     };
 
-    protected final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
-    protected final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
-    protected final Color LIGHT_MODE_TEXT = new Color(0x00000);
+    public final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
+    public final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
+    public final Color LIGHT_MODE_TEXT = new Color(0x00000);
 
-    protected final Color DARK_MODE_TEXT = new Color(0xecf0f1);
-    protected final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
-    protected final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
+    public final Color DARK_MODE_TEXT = new Color(0xecf0f1);
+    public final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
+    public final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
 
 
-    protected void setButtonPanel() {
+    public void setButtonPanel() {
         buttonPanel.setLayout(new GridLayout(7, 5, 2, 2));
 
         for (JButton button : operators) {
@@ -96,10 +99,9 @@ public class Window {
 
     }
 
-    protected void setTextPanel() {
+    public void setTextPanel() {
         inputPanel = new JPanel(new GridLayout(1, 1));
         resultPanel = new JPanel(new GridLayout(1, 1));
-
 
         inputField.setFont(new Font("Roboto", Font.BOLD, 50));
         runningResultField.setFont(new Font("Roboto", Font.ITALIC, 15));
@@ -118,7 +120,7 @@ public class Window {
         resultPanel.add(runningResultField);
     }
 
-    protected void setNamePanel() {
+    public void setNamePanel() {
         namePanel = new JPanel();
         creatorLabel = new JLabel("Arevalo, Lance Gabrielle S.");
 
@@ -130,7 +132,7 @@ public class Window {
         namePanel.add(creatorLabel);
     }
 
-    protected void setFrame() {
+    public void setFrame() {
         subPanel.setLayout(new BorderLayout());
         subPanel.add(buttonPanel, BorderLayout.NORTH);
         subPanel.add(namePanel, BorderLayout.SOUTH);
@@ -149,5 +151,7 @@ public class Window {
         frame.setResizable(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
+
 
 }

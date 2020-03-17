@@ -8,7 +8,7 @@ What can your calculator do?
 - My calculator can do a lot of things, it's a hybrid of a normal calculator and a scientific calculator. But the real question is
   what are the limitations of it.
 
-  Limitations of my calculator starts with incomplete functions that can be found in a normal Scientific Calculator.InputHandlers.ButtonHandling. This calculator
+  Limitations of my calculator starts with incomplete functions that can be found in a normal Scientific Calculator.Compute.IO. This calculator
   can only provide you the basic operations in order to compute a function in a PEMDAS way.
   
 How did you created the Algorithm for the Computations?
