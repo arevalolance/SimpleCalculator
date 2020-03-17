@@ -24,11 +24,11 @@ How is the computing done?
  
 TLDR'd the computing process...
  - IF (TOKEN IS DIGIT)
-      PUT TOKEN IN STACK
-   ELSE
-      IF TOKEN NEEDS TWO NUMBERS
-          COMPUTE NUM1 && NUM 2 WITH GIVEN TOKEN
-      ELSE
-          COMPUTE NUM WITH GIVEN TOKEN
+ -     PUT TOKEN IN STACK
+ - ELSE
+ -     IF TOKEN NEEDS TWO NUMBERS
+ -        COMPUTE NUM1 && NUM 2 WITH GIVEN TOKEN
+ -     ELSE
+ -        COMPUTE NUM WITH GIVEN TOKEN
           
           
