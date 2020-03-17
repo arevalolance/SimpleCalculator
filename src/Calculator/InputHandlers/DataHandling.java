@@ -6,8 +6,7 @@ import Calculator.UI.Window;
 import javax.swing.*;
 import java.awt.*;
 
-public class DataHandling extends Window implements DataIO{
-
+public class DataHandling extends Window implements DataIO {
 
 
     /**
@@ -30,7 +29,7 @@ public class DataHandling extends Window implements DataIO{
         try {
 
             String series = output.append(inputField.getText()).toString();
-            System.out.println(series);
+            System.out.println(Operation.toPostFix(series));
             Double result = Operation.computePostFix(Operation.toPostFix(series));
 
             output.delete(0, output.toString().length());
@@ -178,26 +177,20 @@ public class DataHandling extends Window implements DataIO{
         runningResultField.setText(series);
     }
 
-    /**
-     * This sets the action/process of the button for computing the given data in the TextField into its Percentage form.
-     */
-    public void percent() {
-        String percentage = Double.toString(computePercentage(parseNumber(input.toString())));
-        inputField.setText(percentage);
-        input.delete(0, input.toString().length());
-        input.append(percentage);
-    }
+    public void inputTrigo(String token){
+        if (output.length() > -1 || Character.isDigit(output.toString().charAt(output.toString().length() - 2))){
+            if (input.toString().equalsIgnoreCase("0"))
+                input.delete(0, input.toString().length());
 
-    /**
-     * This sets the action/process of the button which converts the number in the textfield into its Mathematical Inverse
-     */
-    public void inverse() {
-        double a = inverse(parseNumber(inputField.getText()));
+            String series = output.append(input.toString()).append(token).append(" ").toString();
 
-        input.delete(0, input.toString().length());
+            input.delete(0, input.toString().length());
 
-        input.append(a);
-        inputField.setText(input.toString());
+            inputField.setText("0");
+            runningResultField.setText(series);
+        }else {
+            inputOperator(token);
+        }
     }
 
     /**

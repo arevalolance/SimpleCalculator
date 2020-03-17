@@ -141,6 +141,7 @@ public class Operation {
         Stack<Double> stack = new Stack<>();
 
         for (String token : postfix.split("\\s")) {
+            System.out.println(token);
 
             try {
 
@@ -148,10 +149,22 @@ public class Operation {
 
             } catch (Exception e) {
 
-                double a = stack.pop();
-                double b = stack.pop();
+                if (token.equals("ln") || token.equals("log") || token.equals("√") ||
+                        token.equals("sin") || token.equals("cos") || token.equals("tan")) {
 
-                stack.push(compute(b, a, token));
+                    double a = stack.pop();
+
+                    System.out.println(a);
+                    stack.push(compute(a, token));
+
+                } else {
+
+                    double a = stack.pop();
+                    double b = stack.pop();
+
+                    stack.push(compute(b, a, token));
+
+                }
             }
 
         }
@@ -186,16 +199,46 @@ public class Operation {
             case POWER:
                 result = Math.pow(x, y);
                 break;
+            case ROOT:
+                if (op.equals("ⁿ√"))
+                    result = Math.pow(y, 1.0 / x);
+                break;
             case LOG:
+                if (op.equals("logxy"))
+                    result = Math.log(x * y);
+                break;
 
         }
 
         return result;
     }
 
-    private static double compute(double a, String op){
+    private static double compute(double a, String op) {
+        double result = 0;
 
-        return 0;
+        switch (ops.get(op)) {
+            case LOG:
+                if (op.equals("log"))
+                    result = Math.log(a);
+                else if (op.equals("ln"))
+                    result = Math.log10(a);
+                break;
+            case TRIGO:
+                if (op.equals("sin"))
+                    result = Math.sin(a);
+                else if (op.equals("cos"))
+                    result = Math.cos(a);
+                else if (op.equals("tan"))
+                    result = Math.tan(a);
+                break;
+            case ROOT:
+                result = Math.sqrt(a);
+                break;
+        }
+
+
+        return result;
+
     }
 
 }

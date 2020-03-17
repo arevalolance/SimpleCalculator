@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 
 public class UserInputs extends DataHandling {
 
-    public void buttonHandlers(JButton[] buttons){
+    public void buttonHandlers(JButton[] buttons) {
 
         // DARK MODE TOGGLE
         buttons[0].addActionListener(e -> darkModeToggle());
@@ -30,13 +30,13 @@ public class UserInputs extends DataHandling {
         buttons[6].addActionListener(e -> raiseToN());
 
         // SIN
-        buttons[7].addActionListener(e -> inputOperator("sin"));
+        buttons[7].addActionListener(e -> inputTrigo("sin"));
 
         // COS
-        buttons[8].addActionListener(e -> inputOperator("cos"));
+        buttons[8].addActionListener(e -> inputTrigo("cos"));
 
         // TAN
-        buttons[9].addActionListener(e -> inputOperator("tan"));
+        buttons[9].addActionListener(e -> inputTrigo("tan"));
 
         // OPEN PARENTHESIS
         buttons[10].addActionListener(e -> openParenthesis());
@@ -83,8 +83,8 @@ public class UserInputs extends DataHandling {
         // SHOW RESULT
         buttons[buttons.length - 1].addActionListener(e -> showResult());
 
-        for (JButton button : operators){
-            if (Character.isDigit(button.getText().charAt(0))){
+        for (JButton button : operators) {
+            if (Character.isDigit(button.getText().charAt(0))) {
                 button.addActionListener(e -> inputString(button.getText()));
             }
         }
