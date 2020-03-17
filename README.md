@@ -23,12 +23,12 @@ How is the computing done?
  other one only needs one.
  
 TLDR'd the computing process...
- - IF (TOKEN IS DIGIT)
- -     PUT TOKEN IN STACK
- - ELSE
- -     IF TOKEN NEEDS TWO NUMBERS
- -        COMPUTE NUM1 && NUM 2 WITH GIVEN TOKEN
- -     ELSE
- -        COMPUTE NUM WITH GIVEN TOKEN
+ <br/> IF (TOKEN IS DIGIT)
+ <br/>     PUT TOKEN IN STACK
+ <br/> ELSE
+ <br/>     IF TOKEN NEEDS TWO NUMBERS
+ <br/>        COMPUTE NUM1 && NUM 2 WITH GIVEN TOKEN
+ <br/>     ELSE
+ <br/>        COMPUTE NUM WITH GIVEN TOKEN
           
           
