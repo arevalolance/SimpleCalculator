@@ -1,3 +1,5 @@
+package Calculator.Compute;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Deque;
@@ -5,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 /**
- * {@code Operation} contains all of the computing algorithm for converting a series into a postfix form
+ * {@code Calculator.Compute.Operation} contains all of the computing algorithm for converting a series into a postfix form
  * that follows the proper precedence of a number and operator based on a created enum of Operators.
  * <p>
  * <p>The Algorithm that was used for creating this was the Shunting Yard Algorithm by Dijkstra.</p>
@@ -17,10 +19,10 @@ import java.util.Stack;
  *
  * @author Lance Gabrielle S Arevalo
  */
-class Operation {
+public class Operation {
 
     /**
-     * This creates a key and value pair for the Operators. Each of the Operator is assigned to a specific element
+     * This creates a key and value pair for the Operators. Each of the Calculator.Compute.Operator is assigned to a specific element
      * that can be found in the enumerator created [ Please see {@link Operator} ]
      */
     private static Map<String, Operator> ops = new HashMap<>() {{
@@ -79,7 +81,7 @@ class Operation {
      * @param infix to be converted
      * @return postfix form
      */
-    static String toPostFix(String infix) {
+    public static String toPostFix(String infix) {
 
         StringBuilder output = new StringBuilder();
         Deque<String> stack = new LinkedList<>();
@@ -126,7 +128,7 @@ class Operation {
      * @param postfix arranged form of the series
      * @return the result of the series
      */
-    static Double computePostFix(String postfix) {
+    public static Double computePostFix(String postfix) {
 
         Stack<Double> stack = new Stack<>();
 

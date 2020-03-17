@@ -1,8 +1,10 @@
+package Calculator.Compute;
+
 /**
- * {@code Operator} sets all of the proper values for each operator that can be used in a Calculator.
+ * {@code Calculator.Compute.Operator} sets all of the proper values for each operator that can be used in a Calculator.Calculator.
  * With this, it will set a value for the proper precedence of every key.
  */
-enum Operator {
+public enum Operator {
     ADD(1),
     SUBTRACT(2),
     MULTIPLY(3),

@@ -1,10 +1,12 @@
+package Calculator.InputHandlers;
+
+import Calculator.Compute.Operation;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
- * <p>{@code Calculator} holds all of the necessary processes needed for the program
+ * <p>{@code Calculator.Calculator} holds all of the necessary processes needed for the program
  * to run. This class contains all of the key bindings, button handlers, computing
  * process ( basic computings ) and the initialization of the components.</p>
  *
@@ -13,91 +15,7 @@ import java.awt.event.KeyListener;
  *
  * @author Lance Gabrielle S Arevalo
  */
-public class Calculator extends Window {
-
-    /**
-     * Acts as a container for the user's input on the calculator.
-     */
-    private StringBuilder input = new StringBuilder();
-
-    /**
-     * Acts as a container for the whole series inputted by the user.
-     * This is used for producing the final output.
-     */
-    private StringBuilder output = new StringBuilder();
-
-    /**
-     * This class is used for handling all of the key inputs in the keyboard. Since the text fields are non editable, They key bindings
-     * created here are only limited to the numbers and operators available inside the calculator.
-     */
-    class KeyHandlers implements KeyListener {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_9 && e.getKeyCode() == KeyEvent.VK_SHIFT)
-                inputString(" ( ");
-            if (e.getKeyCode() == KeyEvent.VK_0 && e.getKeyCode() == KeyEvent.VK_SHIFT)
-                inputString(" ) ");
-            if (e.getKeyCode() == KeyEvent.VK_DIVIDE || e.getKeyCode() == KeyEvent.VK_SLASH)
-                inputOperator('/');
-            if (e.getKeyCode() == KeyEvent.VK_ASTERISK || e.getKeyCode() == KeyEvent.VK_MULTIPLY)
-                inputOperator('*');
-            if (e.getKeyCode() == KeyEvent.VK_MINUS || e.getKeyCode() == KeyEvent.VK_SUBTRACT)
-                inputOperator('-');
-            if (e.getKeyCode() == KeyEvent.VK_ADD || e.getKeyCode() == KeyEvent.VK_PLUS)
-                inputOperator('+');
-            if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_EQUALS)
-                showResult();
-            if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1)
-                inputString("1");
-            if (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2)
-                inputString("2");
-            if (e.getKeyCode() == KeyEvent.VK_3 || e.getKeyCode() == KeyEvent.VK_NUMPAD3)
-                inputString("3");
-            if (e.getKeyCode() == KeyEvent.VK_4 || e.getKeyCode() == KeyEvent.VK_NUMPAD4)
-                inputString("4");
-            if (e.getKeyCode() == KeyEvent.VK_5 || e.getKeyCode() == KeyEvent.VK_NUMPAD5)
-                inputString("5");
-            if (e.getKeyCode() == KeyEvent.VK_6 || e.getKeyCode() == KeyEvent.VK_NUMPAD6)
-                inputString("6");
-            if (e.getKeyCode() == KeyEvent.VK_7 || e.getKeyCode() == KeyEvent.VK_NUMPAD7)
-                inputString("7");
-            if (e.getKeyCode() == KeyEvent.VK_8 || e.getKeyCode() == KeyEvent.VK_NUMPAD8)
-                inputString("8");
-            if (e.getKeyCode() == KeyEvent.VK_9 || e.getKeyCode() == KeyEvent.VK_NUMPAD9)
-                inputString("9");
-            if (e.getKeyCode() == KeyEvent.VK_0 || e.getKeyCode() == KeyEvent.VK_NUMPAD0)
-                inputString("0");
-            if (e.getKeyCode() == KeyEvent.VK_PERIOD || e.getKeyCode() == KeyEvent.VK_DECIMAL)
-                inputString(".");
-            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                try {
-                    inputField.setText(input.deleteCharAt(input.toString().length() - 1).toString());
-                } catch (Exception ex) {
-                    System.out.println("no number left");
-                }
-            }
-            if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-                input.delete(0, input.toString().length());
-                output.delete(0, output.toString().length());
-
-                inputField.setText("0");
-                runningResultField.setText("");
-            }
-
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
-    }
-
+public class ButtonHandling extends DataHandling {
 
     /**
      * This variable contains the state of the window's theme.
@@ -108,9 +26,9 @@ public class Calculator extends Window {
     private static boolean darkMode = false;
 
     /**
-     * This method is used for toggling the dark mode option found in the Calculator Program.
+     * This method is used for toggling the dark mode option found in the Calculator.Calculator Program.
      */
-    private void darkModeToggle() {
+    protected void darkModeToggle() {
         operators[0].addActionListener(e -> {
             darkMode = !darkMode; // --> boolean that negates the current state when pressed
             if (darkMode) {
@@ -407,33 +325,10 @@ public class Calculator extends Window {
         operators[27].addActionListener(e -> showResult());
     }
 
-    /**
-     * This method is used for inputting a string inside the text field. It is done by setting the input text field's text
-     * to the string made through the string builder. Each token in the string is separated by a space.
-     *
-     * @param token String to be appended
-     */
-    private void inputString(String token) {
-        if (input.toString().equalsIgnoreCase("0")) {
-            input.delete(0, input.toString().length());
-        }
-        inputField.setText(input.append(token).toString());
-    }
 
-    private void inputOperator(char token) {
-        if (input.toString().equalsIgnoreCase("0"))
-            input.delete(0, input.toString().length());
-
-        String series = output.append(input.toString()).append(" ").append(token).append(" ").toString();
-
-        input.delete(0, input.toString().length());
-
-        inputField.setText("0");
-        runningResultField.setText(series);
-    }
 
     /**
-     * <n>This method is sued for changing the color theme of the Calculator program.</n>
+     * <n>This method is sued for changing the color theme of the Calculator.Calculator program.</n>
      * <n>The following components are changed:</n>
      * <n>Button's Background and Text Color</n>
      * <n>Main Panel, Button Panel, Input and Output Text Panel</n>
@@ -461,34 +356,12 @@ public class Calculator extends Window {
         runningResultField.setForeground(text_color);
     }
 
-    /**
-     * This method is used for showing the Result of the inputted series. It also carries out an error in case a Syntax error
-     * occured during the typing of the problem.
-     */
-    private void showResult() {
-        try {
-            String series = output.append(inputField.getText()).toString();
-            System.out.println(series);
-            Double result = Operation.computePostFix(Operation.toPostFix(series));
 
-            output.delete(0, output.toString().length());
-            input.delete(0, input.toString().length());
-
-            inputField.setText(input.append(result).toString());
-            runningResultField.setText("");
-        } catch (Exception ex) {
-            output.delete(0, output.toString().length());
-            input.delete(0, input.toString().length());
-
-            inputField.setText("Syntax Error");
-            runningResultField.setText("");
-        }
-    }
 
     /**
      * This just simply calls all of the methods needed for the actions of every button.
      */
-    private void buttonHandlers() {
+    protected void buttonHandlers() {
         clearLastEntryButton();
         clearAllButton();
         clearLastCharacterButton();
@@ -569,40 +442,6 @@ public class Calculator extends Window {
         }
 
         return parsed;
-    }
-
-
-    /**
-     * This starts up and creates all of the required objects for the GUI and adds all of the needed Listeners in order for the
-     * program to function very well.
-     */
-    void initComponents() {
-        frame = new JFrame("Calculator");
-        mainPanel = new JPanel();
-        buttonPanel = new JPanel();
-        inputPanel = new JPanel();
-        resultPanel = new JPanel();
-        inputField = new JTextField("0");
-        runningResultField = new JTextField();
-        subPanel = new JPanel();
-
-        darkModeToggle();
-
-        setNamePanel();
-        setTextPanel();
-        setButtonPanel();
-        setFrame();
-
-        buttonHandlers();
-        KeyHandlers keyHandlers = new KeyHandlers();
-        for (JButton button : operators)
-            button.addKeyListener(keyHandlers);
-        buttonPanel.addKeyListener(keyHandlers);
-        mainPanel.addKeyListener(keyHandlers);
-        inputField.addKeyListener(keyHandlers);
-        runningResultField.addKeyListener(keyHandlers);
-        frame.addKeyListener(keyHandlers);
-
     }
 
 }

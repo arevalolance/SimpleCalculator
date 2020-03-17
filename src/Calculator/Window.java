@@ -1,8 +1,10 @@
+package Calculator;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * {@code Window} is a class where all of the GUI components are created. This class contains all of my
+ * {@code Calculator.Window} is a class where all of the GUI components are created. This class contains all of my
  * {@code JPanel}, {@code JTextField}, {@code JButton} components are created and added into the
  * {@code JFrame}.
  * <p>
@@ -14,59 +16,72 @@ import java.awt.*;
  *
  * @author Lance Gabrielle S Arevalo
  */
-class Window {
-    JLabel creatorLabel;
-    JFrame frame;
-    JPanel buttonPanel;
-    JPanel inputPanel;
-    JPanel resultPanel;
-    JPanel mainPanel;
-    JPanel namePanel;
-    JPanel subPanel;
-    JTextField inputField;
-    JTextField runningResultField;
-    JButton[] operators = new JButton[]{
+public class Window {
+    protected JLabel creatorLabel;
+    protected JFrame frame;
+    protected JPanel buttonPanel;
+    protected JPanel inputPanel;
+    protected JPanel resultPanel;
+    protected JPanel mainPanel;
+    protected JPanel namePanel;
+    protected JPanel subPanel;
+    protected JTextField inputField;
+    protected JTextField runningResultField;
+    protected JButton[] operators = new JButton[]{
             new JButton("DARK"),
+            new JButton("π"),
             new JButton("CE"),
             new JButton("C"),
             new JButton("x"),
-            new JButton("("),
-            new JButton(")"),
-            new JButton("%"),
-            new JButton("1/x"),
+
             new JButton("x²"),
             new JButton("xⁿ"),
-            new JButton("|x|"),
+            new JButton("sin"),
+            new JButton("cos"),
+            new JButton("tan"),
+
+            new JButton("("),
+            new JButton(")"),
+            new JButton("√"),
+            new JButton("ⁿ√"),
             new JButton("/"),
+
+            new JButton("log"),
             new JButton("7"),
             new JButton("8"),
             new JButton("9"),
             new JButton("*"),
+
+            new JButton("logₓy"),
             new JButton("4"),
             new JButton("5"),
             new JButton("6"),
             new JButton("-"),
+
+            new JButton("e"),
             new JButton("1"),
             new JButton("2"),
             new JButton("3"),
             new JButton("+"),
+
+            new JButton("ln"),
             new JButton("+/-"),
             new JButton("0"),
             new JButton("."),
             new JButton("=")
     };
 
-    final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
-    final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
-    final Color LIGHT_MODE_TEXT = new Color(0x00000);
+    protected final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
+    protected final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
+    protected final Color LIGHT_MODE_TEXT = new Color(0x00000);
 
-    final Color DARK_MODE_TEXT = new Color(0xecf0f1);
-    final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
-    final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
+    protected final Color DARK_MODE_TEXT = new Color(0xecf0f1);
+    protected final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
+    protected final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
 
 
-    void setButtonPanel() {
-        buttonPanel.setLayout(new GridLayout(7, 4, 2, 2));
+    protected void setButtonPanel() {
+        buttonPanel.setLayout(new GridLayout(7, 5, 2, 2));
 
         for (JButton button : operators) {
             button.setBackground(LIGHT_BUTTON_OPERATORS_COLOR);
@@ -81,7 +96,7 @@ class Window {
 
     }
 
-    void setTextPanel() {
+    protected void setTextPanel() {
         inputPanel = new JPanel(new GridLayout(1, 1));
         resultPanel = new JPanel(new GridLayout(1, 1));
 
@@ -103,7 +118,7 @@ class Window {
         resultPanel.add(runningResultField);
     }
 
-    void setNamePanel() {
+    protected void setNamePanel() {
         namePanel = new JPanel();
         creatorLabel = new JLabel("Arevalo, Lance Gabrielle S.");
 
@@ -115,7 +130,7 @@ class Window {
         namePanel.add(creatorLabel);
     }
 
-    void setFrame() {
+    protected void setFrame() {
         subPanel.setLayout(new BorderLayout());
         subPanel.add(buttonPanel, BorderLayout.NORTH);
         subPanel.add(namePanel, BorderLayout.SOUTH);
