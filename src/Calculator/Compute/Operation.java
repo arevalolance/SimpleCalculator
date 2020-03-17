@@ -31,6 +31,14 @@ public class Operation {
         put("*", Operator.MULTIPLY);
         put("/", Operator.DIVIDE);
         put("^", Operator.POWER);
+        put("sin", Operator.TRIGO);
+        put("cos", Operator.TRIGO);
+        put("tan", Operator.TRIGO);
+        put("log", Operator.LOG);
+        put("logx", Operator.LOG);
+        put("ln", Operator.LOG);
+        put("√", Operator.ROOT);
+        put("ⁿ√", Operator.ROOT);
     }};
 
     /**
@@ -178,9 +186,16 @@ public class Operation {
             case POWER:
                 result = Math.pow(x, y);
                 break;
+            case LOG:
+
         }
 
         return result;
+    }
+
+    private static double compute(double a, String op){
+
+        return 0;
     }
 
 }

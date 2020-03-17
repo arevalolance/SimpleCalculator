@@ -1,20 +1,18 @@
-package Calculator;
-
-import Calculator.InputHandlers.DataHandling;
+import Calculator.InputHandlers.UserInputs;
 
 import javax.swing.*;
 
 /**
- * {@code Calculator.Executable} is the main class for executing the whole program.
- * This initiates all of the components in the {@code Calculator.InputHandlers.Window} class.
+ * {@code Executable} is the main class for executing the whole program.
+ * This initiates all of the components in the {@code Calculator.UI.Window} class.
  *
  * @author Lance Gabrielle S Arevao
  */
-public class Executable extends DataHandling {
+public class Executable {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            DataHandling window = new DataHandling();
+            UserInputs window = new UserInputs();
             try {
 
                 long startTime = System.nanoTime();

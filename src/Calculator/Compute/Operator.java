@@ -9,7 +9,10 @@ public enum Operator {
     SUBTRACT(2),
     MULTIPLY(3),
     DIVIDE(4),
-    POWER(5);
+    POWER(5),
+    ROOT(5),
+    LOG(5),
+    TRIGO(5);
 
     /**
      * A value that will contain the precedence of a certain key.

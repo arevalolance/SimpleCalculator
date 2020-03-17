@@ -1,22 +1,25 @@
 package Calculator.InputHandlers;
 
 import Calculator.Compute.Operation;
+import Calculator.UI.Window;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class DataHandling extends Window implements DataIO {
+public class DataHandling extends Window implements DataIO{
+
+
 
     /**
      * Acts as a container for the user's input on the calculator.
      */
-    StringBuilder input = new StringBuilder();
+    public StringBuilder input = new StringBuilder();
 
     /**
      * Acts as a container for the whole series inputted by the user.
      * This is used for producing the final output.
      */
-    StringBuilder output = new StringBuilder();
+    public StringBuilder output = new StringBuilder();
 
 
     /**
@@ -25,6 +28,7 @@ public class DataHandling extends Window implements DataIO {
      */
     public void showResult() {
         try {
+
             String series = output.append(inputField.getText()).toString();
             System.out.println(series);
             Double result = Operation.computePostFix(Operation.toPostFix(series));
@@ -34,12 +38,17 @@ public class DataHandling extends Window implements DataIO {
 
             inputField.setText(input.append(result).toString());
             runningResultField.setText("");
+
+            System.out.println(inputField.getText());
+
         } catch (Exception ex) {
+            ex.printStackTrace();
             output.delete(0, output.toString().length());
             input.delete(0, input.toString().length());
 
             inputField.setText("Syntax Error");
             runningResultField.setText("");
+
         }
     }
 
@@ -245,14 +254,6 @@ public class DataHandling extends Window implements DataIO {
     }
 
     /**
-     * This sets the action/process of the button when you want to find the result of the series that you have inputted.
-     */
-    public void result() {
-        operators[27].addActionListener(e -> showResult());
-    }
-
-
-    /**
      * <n>This method is sued for changing the color theme of the Calculator.Calculator program.</n>
      * <n>The following components are changed:</n>
      * <n>Button's Background and Text Color</n>
@@ -343,38 +344,4 @@ public class DataHandling extends Window implements DataIO {
     }
 
 
-    /**
-     * This starts up and creates all of the required objects for the GUI and adds all of the needed Listeners in order for the
-     * program to function very well.
-     */
-    public void initComponents() {
-        frame = new JFrame("Calculator");
-        mainPanel = new JPanel();
-        buttonPanel = new JPanel();
-        inputPanel = new JPanel();
-        resultPanel = new JPanel();
-        inputField = new JTextField("0");
-        runningResultField = new JTextField();
-        subPanel = new JPanel();
-        namePanel = new JPanel();
-        creatorLabel = new JLabel();
-
-        setNamePanel();
-        setTextPanel();
-        setButtonPanel();
-        setFrame();
-
-        ButtonHandling b = new ButtonHandling();
-        b.buttonHandlers();
-
-        KeyHandling keyHandlers = new KeyHandling();
-        for (JButton button : operators)
-            button.addKeyListener(keyHandlers);
-        buttonPanel.addKeyListener(keyHandlers);
-        mainPanel.addKeyListener(keyHandlers);
-        inputField.addKeyListener(keyHandlers);
-        runningResultField.addKeyListener(keyHandlers);
-        frame.addKeyListener(keyHandlers);
-
-    }
 }

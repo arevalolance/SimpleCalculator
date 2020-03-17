@@ -1,13 +1,11 @@
-package Calculator.InputHandlers;
+package Calculator.UI;
 
-import Calculator.InputHandlers.ButtonHandling;
-import Calculator.InputHandlers.KeyHandling;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * {@code Calculator.InputHandlers.Window} is a class where all of the GUI components are created. This class contains all of my
+ * {@code Calculator.UI.Window} is a class where all of the GUI components are created. This class contains all of my
  * {@code JPanel}, {@code JTextField}, {@code JButton} components are created and added into the
  * {@code JFrame}.
  * <p>
@@ -20,6 +18,7 @@ import java.awt.*;
  * @author Lance Gabrielle S Arevalo
  */
 public class Window {
+
     public JLabel creatorLabel;
     public JFrame frame;
     public JPanel buttonPanel;
@@ -28,7 +27,7 @@ public class Window {
     public JPanel mainPanel;
     public JPanel namePanel;
     public JPanel subPanel;
-    public JTextField inputField;
+    public JTextField inputField = new JTextField("0");
     public JTextField runningResultField;
     public JButton[] operators = new JButton[]{
             new JButton("DARK"),
@@ -55,7 +54,7 @@ public class Window {
             new JButton("9"),
             new JButton("*"),
 
-            new JButton("log" + ("\\U+2093") + "y"),
+            new JButton("logxy"),
             new JButton("4"),
             new JButton("5"),
             new JButton("6"),
@@ -74,6 +73,7 @@ public class Window {
             new JButton("=")
     };
 
+
     public final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
     public final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
     public final Color LIGHT_MODE_TEXT = new Color(0x00000);
@@ -81,7 +81,6 @@ public class Window {
     public final Color DARK_MODE_TEXT = new Color(0xecf0f1);
     public final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
     public final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
-
 
     public void setButtonPanel() {
         buttonPanel.setLayout(new GridLayout(7, 5, 2, 2));
@@ -151,6 +150,7 @@ public class Window {
         frame.setResizable(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
 
 
 
