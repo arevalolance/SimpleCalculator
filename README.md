@@ -23,6 +23,7 @@ How is the computing done?
  other one only needs one.
  
 TLDR'd the computing process...
+ - Process: 
  <br/> IF (TOKEN IS DIGIT)
  <br/>     PUT TOKEN IN STACK
  <br/> ELSE
