@@ -1,20 +1,35 @@
 # SimpleCalculator
 A simple calculator that i made in SLU during my freshman year 2019 to 2020
+3/11/2020
 
-This was made during my freshman year in Saint Louis University in 3/11/2020
+FAQ:
 
-FAQ's:
-What can your calculator do?
-- My calculator can do a lot of things, it's a hybrid of a normal calculator and a scientific calculator. But the real question is
-  what are the limitations of it.
+Algorithm used?
+ - Shunting Yard Algorithm by Dijkstra
 
-  Limitations of my calculator starts with incomplete functions that can be found in a normal Scientific Calculator.Compute.IO. This calculator
-  can only provide you the basic operations in order to compute a function in a PEMDAS way.
-  
-How did you created the Algorithm for the Computations?
-- As much as i enjoyed creating this program, the algorithm wasn't made by me. The algorithm that i used was the Shunting Yard Algorithm
-  of Dijkstra. Where you input a series which is an infix and converts it into a postfix form that can be easily computed without worrying
-  about the violation in PEMDAS rule.
-  
-Where did you learn this Algorithm?
-- A simple google search will teach you many things.
+Why Shunting Yard?
+ - Shunting yard is used for getting the Reverse Polish Notation of a given series.
+ 
+What is RPN (Reverse Polish Notation)?
+ - It is a re-arranged series of the user's input which is arranged through proper precedence of operators.
+
+After getting the RPN, What now?
+ - The given RPN of the user's inputted series would then be computer.
+ 
+How is the computing done?
+ - A token is taken from the given series ( series is splitted into different tokens by a space ) then the algorithm checks
+ if it is a number. If it is it would then be added to the stack, if it is not it is automatically understood that the token
+ is an operator. There are 2 kinds of operators given. First one is an operator that needs two numbers for computing and the
+ other one only needs one.
+ 
+TLDR'd the computing process...
+ - Process: 
+ <br/> IF (TOKEN IS DIGIT)
+ <br/>     PUT TOKEN IN STACK
+ <br/> ELSE
+ <br/>     IF TOKEN NEEDS TWO NUMBERS
+ <br/>        COMPUTE NUM1 && NUM 2 WITH GIVEN TOKEN
+ <br/>     ELSE
+ <br/>        COMPUTE NUM WITH GIVEN TOKEN
+          
+          
