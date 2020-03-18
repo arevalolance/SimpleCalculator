@@ -31,9 +31,9 @@ public class Operation {
         put("*", Operator.MULTIPLY);
         put("/", Operator.DIVIDE);
         put("^", Operator.POWER);
-        put("sin", Operator.TRIGO);
-        put("cos", Operator.TRIGO);
-        put("tan", Operator.TRIGO);
+        put("sin", Operator.TRIG);
+        put("cos", Operator.TRIG);
+        put("tan", Operator.TRIG);
         put("log", Operator.LOG);
         put("logx", Operator.LOG);
         put("ln", Operator.LOG);
@@ -141,7 +141,6 @@ public class Operation {
         Stack<Double> stack = new Stack<>();
 
         for (String token : postfix.split("\\s")) {
-            System.out.println(token);
 
             try {
 
@@ -149,22 +148,30 @@ public class Operation {
 
             } catch (Exception e) {
 
-                if (token.equals("ln") || token.equals("log") || token.equals("√") ||
-                        token.equals("sin") || token.equals("cos") || token.equals("tan")) {
+                try {
 
-                    double a = stack.pop();
+                    if (token.equals("ln") || token.equals("log") || token.equals("√") ||
+                            token.equals("sin") || token.equals("cos") || token.equals("tan")) {
 
-                    System.out.println(a);
-                    stack.push(compute(a, token));
+                        double a = stack.pop();
 
-                } else {
+                        stack.push(compute(a, token));
 
-                    double a = stack.pop();
-                    double b = stack.pop();
+                    } else {
 
-                    stack.push(compute(b, a, token));
+                        double a = stack.pop();
+                        double b = stack.pop();
+
+                        stack.push(compute(b, a, token));
+
+                    }
+
+                } catch (Exception ex) {
+
+                    System.out.println("Syntax Error");
 
                 }
+
             }
 
         }
@@ -213,6 +220,14 @@ public class Operation {
         return result;
     }
 
+    /**
+     * This method is used as an alternative when an operator needs only a single digit for computing.
+     * Example of said operations can be the trigonometric functions and logarithmic computations.
+     *
+     * @param a  a number to be computed
+     * @param op operator
+     * @return computed data
+     */
     private static double compute(double a, String op) {
         double result = 0;
 
@@ -223,13 +238,18 @@ public class Operation {
                 else if (op.equals("ln"))
                     result = Math.log10(a);
                 break;
-            case TRIGO:
-                if (op.equals("sin"))
-                    result = Math.sin(a);
-                else if (op.equals("cos"))
-                    result = Math.cos(a);
-                else if (op.equals("tan"))
-                    result = Math.tan(a);
+            case TRIG:
+                switch (op) {
+                    case "sin":
+                        result = Math.sin(a);
+                        break;
+                    case "cos":
+                        result = Math.cos(a);
+                        break;
+                    case "tan":
+                        result = Math.tan(a);
+                        break;
+                }
                 break;
             case ROOT:
                 result = Math.sqrt(a);

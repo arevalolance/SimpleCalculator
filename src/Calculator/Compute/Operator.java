@@ -12,7 +12,7 @@ public enum Operator {
     POWER(5),
     ROOT(5),
     LOG(5),
-    TRIGO(5);
+    TRIG(5);
 
     /**
      * A value that will contain the precedence of a certain key.

@@ -4,9 +4,17 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * {@code UserInputs} contains all of the input handling process by the user's keyboard
+ * and their click of the Button.
+ *
+ * @see Calculator.InputHandlers.DataHandling
+ *
+ * @author Lance Gabrielle S Arevalo
+ */
 public class UserInputs extends DataHandling {
 
-    public void buttonHandlers(JButton[] buttons) {
+    private void buttonHandlers(JButton[] buttons) {
 
         // DARK MODE TOGGLE
         buttons[0].addActionListener(e -> darkModeToggle());
@@ -30,13 +38,13 @@ public class UserInputs extends DataHandling {
         buttons[6].addActionListener(e -> raiseToN());
 
         // SIN
-        buttons[7].addActionListener(e -> inputTrigo("sin"));
+        buttons[7].addActionListener(e -> inputSingleDigitOperator("sin"));
 
         // COS
-        buttons[8].addActionListener(e -> inputTrigo("cos"));
+        buttons[8].addActionListener(e -> inputSingleDigitOperator("cos"));
 
         // TAN
-        buttons[9].addActionListener(e -> inputTrigo("tan"));
+        buttons[9].addActionListener(e -> inputSingleDigitOperator("tan"));
 
         // OPEN PARENTHESIS
         buttons[10].addActionListener(e -> openParenthesis());
@@ -45,16 +53,16 @@ public class UserInputs extends DataHandling {
         buttons[11].addActionListener(e -> closingParenthesis());
 
         // ROOT
-        buttons[12].addActionListener(e -> inputOperator("√"));
+        buttons[12].addActionListener(e -> inputSingleDigitOperator("√"));
 
         // NTH ROOT
-        buttons[13].addActionListener(e -> inputOperator("ⁿ√"));
+        buttons[13].addActionListener(e -> inputSingleDigitOperator("ⁿ√"));
 
         // DIVIDE
-        buttons[14].addActionListener(e -> inputOperator("/"));
+        buttons[14].addActionListener(e -> inputSingleDigitOperator("/"));
 
         // LOGARITHM
-        buttons[15].addActionListener(e -> inputOperator("log"));
+        buttons[15].addActionListener(e -> inputSingleDigitOperator("log"));
 
         // MULLTIPLY
         buttons[19].addActionListener(e -> inputOperator("*"));
@@ -72,7 +80,7 @@ public class UserInputs extends DataHandling {
         buttons[29].addActionListener(e -> inputOperator("+"));
 
         // LN
-        buttons[30].addActionListener(e -> inputOperator("ln"));
+        buttons[30].addActionListener(e -> inputSingleDigitOperator("ln"));
 
         // NEGATE
         buttons[31].addActionListener(e -> negate());
@@ -176,6 +184,7 @@ public class UserInputs extends DataHandling {
         buttonPanel = new JPanel();
         inputPanel = new JPanel();
         resultPanel = new JPanel();
+        inputField = new JTextField();
         runningResultField = new JTextField();
         subPanel = new JPanel();
         namePanel = new JPanel();

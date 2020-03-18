@@ -19,17 +19,17 @@ import java.awt.*;
  */
 public class Window {
 
-    public JLabel creatorLabel;
-    public JFrame frame;
-    public JPanel buttonPanel;
-    public JPanel inputPanel;
-    public JPanel resultPanel;
-    public JPanel mainPanel;
-    public JPanel namePanel;
-    public JPanel subPanel;
-    public JTextField inputField = new JTextField("0");
+    protected JLabel creatorLabel;
+    protected JFrame frame;
+    protected JPanel buttonPanel;
+    protected JPanel inputPanel;
+    protected JPanel resultPanel;
+    protected JPanel mainPanel;
+    protected JPanel namePanel;
+    protected JPanel subPanel;
+    public JTextField inputField;
     public JTextField runningResultField;
-    public JButton[] operators = new JButton[]{
+    protected JButton[] operators = new JButton[]{
             new JButton("DARK"),
             new JButton("π"),
             new JButton("CE"),
@@ -74,19 +74,25 @@ public class Window {
     };
 
 
-    public final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
-    public final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
-    public final Color LIGHT_MODE_TEXT = new Color(0x00000);
+    protected final Color LIGHT_BUTTON_OPERATORS_COLOR = new Color(0xdcdde1);
+    protected final Color LIGHT_WINDOWS_BACKGROUND = new Color(0xe6e6e6);
+    protected final Color LIGHT_MODE_TEXT = new Color(0x00000);
 
-    public final Color DARK_MODE_TEXT = new Color(0xecf0f1);
-    public final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
-    public final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
+    protected final Color DARK_MODE_TEXT = new Color(0xecf0f1);
+    protected final Color DARK_WINDOWS_BACKGROUND = new Color(0x1f1f1f);
+    protected final Color DARK_BUTTON_OPERATORS_COLOR = new Color(0x0131313);
 
-    public void setButtonPanel() {
+    protected void setButtonPanel() {
         buttonPanel.setLayout(new GridLayout(7, 5, 2, 2));
 
         for (JButton button : operators) {
-            button.setBackground(LIGHT_BUTTON_OPERATORS_COLOR);
+            if (Character.isDigit(button.getText().charAt(0))) {
+                button.setBackground(Color.WHITE);
+                button.setForeground(LIGHT_MODE_TEXT);
+            } else {
+                button.setBackground(LIGHT_BUTTON_OPERATORS_COLOR);
+                button.setForeground(LIGHT_MODE_TEXT);
+            }
             button.setBorder(null);
             button.setPreferredSize(new Dimension(100, 75));
             button.setFont(new Font("Roboto", Font.BOLD, 15));
@@ -98,7 +104,7 @@ public class Window {
 
     }
 
-    public void setTextPanel() {
+    protected void setTextPanel() {
         inputPanel = new JPanel(new GridLayout(1, 1));
         resultPanel = new JPanel(new GridLayout(1, 1));
 
@@ -119,7 +125,7 @@ public class Window {
         resultPanel.add(runningResultField);
     }
 
-    public void setNamePanel() {
+    protected void setNamePanel() {
         namePanel = new JPanel();
         creatorLabel = new JLabel("Arevalo, Lance Gabrielle S.");
 
@@ -131,7 +137,7 @@ public class Window {
         namePanel.add(creatorLabel);
     }
 
-    public void setFrame() {
+    protected void setFrame() {
         subPanel.setLayout(new BorderLayout());
         subPanel.add(buttonPanel, BorderLayout.NORTH);
         subPanel.add(namePanel, BorderLayout.SOUTH);
