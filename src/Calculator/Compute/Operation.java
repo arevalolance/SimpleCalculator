@@ -141,39 +141,28 @@ public class Operation {
         Stack<Double> stack = new Stack<>();
 
         for (String token : postfix.split("\\s")) {
-
             try {
-
+                
                 stack.push((Double.parseDouble(token)));
 
             } catch (Exception e) {
-
                 try {
-
                     if (token.equals("ln") || token.equals("log") || token.equals("√") ||
                             token.equals("sin") || token.equals("cos") || token.equals("tan")) {
 
                         double a = stack.pop();
 
                         stack.push(compute(a, token));
-
                     } else {
-
                         double a = stack.pop();
                         double b = stack.pop();
 
                         stack.push(compute(b, a, token));
-
                     }
-
                 } catch (Exception ex) {
-
                     System.out.println("Syntax Error");
-
                 }
-
             }
-
         }
 
         return stack.peek();
